@@ -33,7 +33,7 @@ class Library{
 
 	private boolean showInterface(){
 		LibrarySystemUser activeUser = null;
-		System.out.println("Select your Action");	
+		System.out.println("Welcome to Charles' Library, Select your Action");	
 		System.out.println("1-Login");
 		System.out.println("9-Exit");
 		try {
