@@ -21,12 +21,12 @@ class Library{
 		}
 	}
 	private void initialize(){
-		this.books = new ArrayList<LibraryBook>();
+		this.books = new ArrayList<>();
 		this.addBook("Lord of the Rings", "JRR Tolkin");
 		this.addBook("Room", "Emma Donoghue");
 		this.addBook("Being Ernest", "Oscar Wilde");
 
-		this.users = new ArrayList<LibrarySystemUser>();
+		this.users = new ArrayList<>();
 		this.addUser("admin", "admin", "Library", "Admin", true);
 
 	}
@@ -44,7 +44,7 @@ class Library{
 				return false;
 			}
 		} catch (IOException ioe){
-			System.out.println("IOE thrown");
+			System.out.println("IOE thrown " + ioe.toString());
 			return false;
 		}
 
@@ -77,10 +77,10 @@ class Library{
 							System.out.println(activeUser.loanBook(bookNumber));
 						} 
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					} catch (NumberFormatException nfe){
-						System.out.println("That wasn't a valid book number");
+						System.out.println("That wasn't a valid book number " + nfe.toString());
 					}
 				} else if (s.toUpperCase().equals("RETURN A BOOK") || s.substring(0).equals("3")){
 					List<Integer> loanedBookNumbers = activeUser.getListBooksLoaned();
@@ -97,10 +97,10 @@ class Library{
 								System.out.println(activeUser.returnBook(bookNumber));
 							} 
 						} catch (IOException ioe){
-							System.out.println("IOE thrown");
+							System.out.println("IOE thrown " + ioe.toString());
 							return false;
 						} catch (NumberFormatException nfe){
-							System.out.println("That wasn't a valid book number");
+							System.out.println("That wasn't a valid book number " + nfe.toString());
 						}					
 					} else {
 						System.out.println("You haven't got any books");
@@ -111,14 +111,14 @@ class Library{
 					try {
 						bookName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					}
 					System.out.println("Please enter the Author's name");
 					try {
 						authorName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					}
 					this.addBook(bookName, authorName);
@@ -139,10 +139,10 @@ class Library{
 							System.out.println("Book removed!");
 						} 
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					} catch (NumberFormatException nfe){
-						System.out.println("That wasn't a valid book number");
+						System.out.println("That wasn't a valid book number " + nfe.toString());
 					}
 				} else if (s.toUpperCase().equals("ADD A LIBRARY USER") || s.substring(0).equals("6")){
 					String libraryUserName, passW, firstName, lastName, admin;
@@ -154,28 +154,28 @@ class Library{
 							isAdmin = true;
 						}
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					}
 					System.out.println("Please enter the client's first name");
 					try {
 						firstName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					}
 					System.out.println("Please enter the client's last name");
 					try {
 						lastName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					}
 					System.out.println("Please enter your userName");
 					try {
 						libraryUserName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					}
 					passW = "Password";
@@ -188,7 +188,7 @@ class Library{
 								validPassword = true;
 							}
 						} catch (IOException ioe){
-							System.out.println("IOE thrown");
+							System.out.println("IOE thrown " + ioe.toString());
 							return false;
 						}
 					}
@@ -212,10 +212,10 @@ class Library{
 							}
 						} 
 					} catch (IOException ioe){
-						System.out.println("IOE thrown");
+						System.out.println("IOE thrown " + ioe.toString());
 						return false;
 					} catch (NumberFormatException nfe){
-						System.out.println("That wasn't a valid user number");
+						System.out.println("That wasn't a valid user number " + nfe.toString());
 					}
 				} else if (s.toUpperCase().equals("LOGOUT") || s.substring(0).equals("8")){
 					activeUser = null;
@@ -223,7 +223,7 @@ class Library{
 					System.out.println("Not a valid option try using only the option number");
 				}				
 			} catch (IOException ioe){
-				System.out.println("IOE thrown");
+				System.out.println("IOE thrown " + ioe.toString());
 				return false;
 			}
 		}
@@ -243,20 +243,17 @@ class Library{
 						s = new BufferedReader(new InputStreamReader(System.in)).readLine();
 						if (thisUser.getPassword().equals(s)){
 							return thisUser;
-						} else {
-							System.out.println("Invalid Credentials");
-							return null;
 						}
+						System.out.println("Invalid Credentials");
+						return null;
 					}
 				}
 				System.out.println("UserName not found");
 				return null;
-			} else {
-				return null;
 			}
-			
+			return null;
 		} catch (IOException ioe){
-			System.out.println("IOE thrown");
+			System.out.println("IOE thrown " + ioe.toString());
 		}
 		return null;
 	}
@@ -323,7 +320,7 @@ class Library{
 		private String lastName;
 		private String password;
 		private boolean isEmployee;
-		private List<Integer> booksLoaned = new ArrayList<Integer>(5);
+		private List<Integer> booksLoaned = new ArrayList<>(5);
 		
 		public int getUserNumber(){
 			return userNumber;
@@ -370,18 +367,17 @@ class Library{
 		public String loanBook(int bookNumber){
 			if (booksLoaned.size() > 4){
 				return "You cannot loan this book, please return one of your books first";
-			} else {
-				Iterator<LibraryBook> i = books.iterator();
-				while (i.hasNext()){
-					LibraryBook book = i.next();
-					if (book.getBookNumber() == bookNumber) {
-						booksLoaned.add(Integer.valueOf(bookNumber));
-						book.setIsAvailable(false);
-						return "Thank you, enjoy reading your book";
-					}
-				}
-				return "That selection is not available";
 			}
+			Iterator<LibraryBook> i = books.iterator();
+			while (i.hasNext()){
+				LibraryBook book = i.next();
+				if (book.getBookNumber() == bookNumber) {
+					booksLoaned.add(Integer.valueOf(bookNumber));
+					book.setIsAvailable(false);
+					return "Thank you, enjoy reading your book";
+				}
+			}
+			return "That selection is not available";
 		}
 		public String returnBook(int bookNumber){
 			Iterator<LibraryBook> i = books.iterator();
